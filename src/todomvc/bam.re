@@ -1,16 +1,22 @@
+type foo = string;
+
 module Bam = {
   include ReactRe.Component;
 
-  let name = "BAM";
-  type props = unit;
+  let name = "Bam";
+  type props = {
+    title: string,
+    description: string
+  };
 
   let render {props} => {
     <div>
-      <h1>(ReactRe.stringToElement "FU")</h1>
+      <h1>(ReactRe.stringToElement props.title)</h1>
+      (ReactRe.stringToElement props.description)
     </div>
   };
 };
 
 include ReactRe.CreateComponent Bam;
 
-let createElement ::foo => wrapProps ();
+let createElement ::title ::description => wrapProps {title, description};

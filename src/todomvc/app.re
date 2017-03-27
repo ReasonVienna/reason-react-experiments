@@ -119,7 +119,6 @@ module Top = {
               | None => false
               | Some editing => editing === TodoItem.(todo.id)
               };
-            <Bam />
             <TodoItem
               key=todo.id
               todo
@@ -137,6 +136,15 @@ module Top = {
       let completedCount =
         todos |> List.filter (fun todo => TodoItem.(todo.completed)) |> List.length;
       let activeTodoCount = todosLength - completedCount;
+      let bam =
+        switch (activeTodoCount, completedCount) {
+        | (0, 0) => ReactRe.nullElement
+        | _ =>
+          <Bam
+            title="BOOM TITLE"
+            description="DESCRIPTION"
+          />;
+        };
       let footer =
         switch (activeTodoCount, completedCount) {
         | (0, 0) => ReactRe.nullElement
@@ -173,6 +181,7 @@ module Top = {
           />
         </header>
         main
+        bam
         footer
       </div>
     };
