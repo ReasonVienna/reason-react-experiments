@@ -119,6 +119,7 @@ module Top = {
               | None => false
               | Some editing => editing === TodoItem.(todo.id)
               };
+            <Bam />
             <TodoItem
               key=todo.id
               todo
@@ -132,6 +133,7 @@ module Top = {
           }
         );
       let todosLength = List.length todos;
+
       let completedCount =
         todos |> List.filter (fun todo => TodoItem.(todo.completed)) |> List.length;
       let activeTodoCount = todosLength - completedCount;
