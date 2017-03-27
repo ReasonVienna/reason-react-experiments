@@ -12,3 +12,5 @@ module Bam = {
 };
 
 include ReactRe.CreateComponent Bam;
+
+let createElement ::foo => wrapProps ();
