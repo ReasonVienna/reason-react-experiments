@@ -26,6 +26,7 @@ module TodoFooter = {
       | CompletedTodos => ("", "", "selected")
       };
     <footer className="footer">
+
       <span className="todo-count">
         <strong> (ReactRe.stringToElement (string_of_int props.count)) </strong>
         (ReactRe.stringToElement (" " ^ activeTodoWord ^ " left"))
@@ -36,7 +37,7 @@ module TodoFooter = {
         <li> <a href="#/active" className=active> (ReactRe.stringToElement "Active") </a> </li>
         (ReactRe.stringToElement " ")
         <li>
-          <a href="#/completed" className=completed> (ReactRe.stringToElement "Completed") </a>
+          <a href="#/completed" className=completed> (ReactRe.stringToElement "BAAAAM!") </a>
         </li>
       </ul>
       clearButton
