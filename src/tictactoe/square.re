@@ -10,7 +10,7 @@ module Square = {
   let squareStyle =
     ReactDOMRe.Style.make width::"25px" backgroundColor::"blue" fontSize::"100pt" ();
   let render {props, updater} =>
-    <div style=squareStyle onClick=props.handleClick>
+    <span style=squareStyle onClick=props.handleClick>
       (
         switch props.value {
         | Cross => ReactRe.stringToElement "X"
@@ -18,7 +18,7 @@ module Square = {
         | Empty => ReactRe.stringToElement "?"
         }
       )
-    </div>;
+    </span>;
 };
 
 include ReactRe.CreateComponent Square;
