@@ -9,9 +9,13 @@ module Top = {
     let getInitialState _ => {
       squares: [Circle, Circle, Circle, Empty, Empty, Empty, Cross, Cross, Cross]
     };
+    let handleSquareClick i => {
+      Js.log i;
+      ()
+    };
     let render {state, updater} =>
       <div className="game">
-        <div className="game-board"> <Board squares=state.squares /> </div>
+        <div className="game-board"> <Board squares=state.squares handleSquareClick /> </div>
         <div className="game-info"> <div /> <ol /> </div>
       </div>;
   };
