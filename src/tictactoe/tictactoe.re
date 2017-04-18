@@ -9,13 +9,18 @@ module Top = {
     let getInitialState _ => {
       squares: [Circle, Circle, Circle, Empty, Empty, Empty, Cross, Cross, Cross]
     };
-    let handleSquareClick i => {
+    let handleSquareClick state i => {
       Js.log i;
+      switch (List.nth state.squares i) {
+        | Circle => Js.log "circle!"
+        | Cross => Js.log "cross!"
+        | Empty => Js.log "empty!" /* now do a function like this guys! state.squares[i] = Circle */
+      };
       ()
     };
     let render {state, updater} =>
       <div className="game">
-        <div className="game-board"> <Board squares=state.squares handleSquareClick /> </div>
+        <div className="game-board"> <Board squares=state.squares handleSquareClick=(handleSquareClick state) /> </div>
         <div className="game-info"> <div /> <ol /> </div>
       </div>;
   };
