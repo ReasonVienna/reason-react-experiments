@@ -6,6 +6,7 @@ module.exports = {
     logo: './lib/js/src/logo/logoRoot.js',
     todomvc: './lib/js/src/todomvc/app.js',
     interop: './src/interop/interopRoot.js',
+		tictactoe: './lib/js/src/tictactoe/tictactoe.js',
   },
   output: {
     path: path.join(__dirname, "bundledOutputs"),
