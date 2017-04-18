@@ -17,7 +17,7 @@ module Top = {
       };
       ()
     };
-    let render {state, updater} =>
+    let render {state} =>
       <div className="game">
         <div className="game-board"> <Board squares=state.squares handleSquareClick=(handleSquareClick state) /> </div>
         <div className="game-info"> <div /> <ol /> </div>
