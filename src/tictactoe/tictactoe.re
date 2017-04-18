@@ -10,7 +10,6 @@ module Top = {
       squares: [Circle, Circle, Circle, Empty, Empty, Empty, Cross, Cross, Cross]
     };
     let handleSquareClick state i => {
-      Js.log i;
       switch (List.nth state.squares i) {
         | Circle => Js.log "circle!"
         | Cross => Js.log "cross!"
