@@ -11,15 +11,17 @@ module Top = {
     };
     let handleSquareClick state i => {
       switch (List.nth state.squares i) {
-        | Circle => Js.log "circle!"
-        | Cross => Js.log "cross!"
-        | Empty => Js.log "empty!" /* now do a function like this guys! state.squares[i] = Circle */
+      | Circle => Js.log "circle!"
+      | Cross => Js.log "cross!"
+      | Empty => Js.log "empty!" /* now do a function like this guys! state.squares[i] = Circle */
       };
       ()
     };
     let render {state} =>
       <div className="game">
-        <div className="game-board"> <Board squares=state.squares handleSquareClick=(handleSquareClick state) /> </div>
+        <div className="game-board">
+          <Board squares=state.squares handleSquareClick=(handleSquareClick state) />
+        </div>
         <div className="game-info"> <div /> <ol /> </div>
       </div>;
   };
