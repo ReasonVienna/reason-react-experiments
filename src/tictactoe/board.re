@@ -1,20 +1,23 @@
 module Board = {
+  type tstate = Tictactoe.Top.TicTacToe.state;
   include ReactRe.Component;
-  type props = {squares: list Square.squareState, handleSquareClick: int => unit};
-  let name = "Board";
-  let handleClick i {props} _ => {
-    props.handleSquareClick i;
-    None
+  type props = {
+    squares: list Square.squareState,
+    handleSquareClick: int => componentBag tstate 'a 'b => 'c => option tstate
   };
-  let breakOnThree i => i mod 3 == 0 ? <br /> : <span />;
-  let render {props, updater} => {
-    let foo =
+  let name = "Board";
+  let breakOnThree i => i mod 3 =T= 0 ? <br /> : <span />;
+  let render {props} => {
+    let squareElements =
       props.squares |>
       List.mapi (
         fun i s =>
-          <span> (breakOnThree i) <Square value=s handleClick=(updater (handleClick i)) /> </span>
+          <span>
+            (breakOnThree i)
+            <Square value=s handleClick=(props.handleSquareClick i) />
+          </span>
       );
-    <div> (ReactRe.arrayToElement (Array.of_list foo)) </div>
+    <div> (ReactRe.arrayToElement (Array.of_list squareElements)) </div>
   };
 };
 
