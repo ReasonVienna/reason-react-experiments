@@ -5,9 +5,10 @@ module Top = {
     include ReactRe.Component.Stateful;
     let name = "TicTacToe";
     type props = unit;
-    type state = {squares: list Square.squareState};
+    type state = {squares: list Square.squareState, count: int};
     let getInitialState _ => {
-      squares: [Circle, Circle, Circle, Empty, Empty, Empty, Cross, Cross, Cross]
+      squares: [Circle, Circle, Circle, Empty, Empty, Empty, Cross, Cross, Cross],
+      count: 0
     };
     let handleSquareClick state i => {
       switch (List.nth state.squares i) {
@@ -17,9 +18,13 @@ module Top = {
       };
       ()
     };
-    let render {state} =>
+    let countUp amount {state} _evt => Some {...state, count: state.count + amount};
+    let render {state, updater} =>
       <div className="game">
         <div className="game-board">
+          <div onClick=(updater (countUp 2))>
+            (ReactRe.stringToElement (string_of_int state.count))
+          </div>
           <Board squares=state.squares handleSquareClick=(handleSquareClick state) />
         </div>
         <div className="game-info"> <div /> <ol /> </div>
