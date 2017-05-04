@@ -31,6 +31,7 @@ npm install
 npm start
 # in another tab
 npm run build
+# open the html file directly in your browsers e.g. src/tictactoe/index.html
 ```
 
 After you see the webpack compilation succeed (the `npm run build` step), open up the nested html files in `src/*`! Then modify whichever file in `src` and refresh the page to see the changes.
