@@ -1,38 +1,54 @@
 let namespace = "reason-react-tictactoe";
 
+type playerState =
+  | Circle
+  | Cross;
+
 module Top = {
   module TicTacToe = {
     include ReactRe.Component.Stateful;
     let name = "TicTacToe";
     type props = unit;
-    type state = {
-      squares: list Square.squareState,
-      turn: bool
-    };
+    type state = {squares: list Square.squareState, player: playerState};
     let getInitialState _ => {
       squares: [Empty, Empty, Empty, Empty, Empty, Empty, Empty, Empty, Empty],
-      turn: false
+      player: Circle
     };
-    let handleSquareClick {state} i => {
-
-      // get position in array where the user clicked on
-      Js.log i;
-
-      // easy check for whos turn it is
-      switch (state.turn) {
-      | false =>
-        Js.log state.turn;
-      | true =>
-        Js.log state.turn;
+    let switchPlayer (current: playerState) =>
+      switch current {
+      | Circle => Cross
+      | Cross => Circle
       };
-
-      // update the turn for the opposite value
-      Some {...state, turn: not state.turn};
+    let isEmptySquare (square: Square.squareState) =>
+      switch square {
+      | Empty => true
+      | _ => false
+      };
+    let eventuallySetSquare squares selection player =>
+      List.mapi
+        (
+          fun i square =>
+            if (i == selection && isEmptySquare square) {
+              switch player {
+              | Circle => Square.Circle
+              | Cross => Square.Cross
+              }
+            } else {
+              square
+            }
+        )
+        squares;
+    let playTurn {state} (selection: int) => {
+      let {squares, player} = state;
+      Some {
+        squares: eventuallySetSquare squares selection player,
+        player: switchPlayer state.player
+      }
     };
     let render {state, updater} =>
       <div className="game">
         <div className="game-board">
-          <Board squares=state.squares handleSquareClick=( updater handleSquareClick) />
+          <Board squares=state.squares handleSquareClick=(updater playTurn) />
         </div>
         <div className="game-info"> <div /> <ol /> </div>
       </div>;
